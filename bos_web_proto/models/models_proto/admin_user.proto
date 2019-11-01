@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package models;
+
+message AdminUser {
+    string Id = 1;
+    string Name = 2;
+    string Phone = 3;
+    string Password = 4;
+    string Sex = 5;
+    string CertNo = 6;
+    string Status = 7;
+    string JobNo = 8;
+    string OrgNo = 9;
+    string RegisterUri = 10;
+    string JoinTime = 11;
+    string LeaveTime = 12;
+}
