@@ -2,8 +2,10 @@ syntax = "proto3";
 
 package services;
 
+//protoc -I ../../:. --micro_out=../ ./*.proto
+
 import "models/models_proto/admin_user.proto";
 
 service AdminUserService {
-    rpc AddUser(models.AdminUser) returns(models.AdminUser){};
+    rpc AddAdminUser(models.AdminUser) returns(models.AdminUser){};
 }

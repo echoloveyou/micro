@@ -7,7 +7,7 @@ import (
 	fmt "fmt"
 	proto "github.com/golang/protobuf/proto"
 	math "math"
-	models_proto "models/models_proto"
+	models_proto "models"
 )
 
 import (
@@ -35,7 +35,7 @@ var _ server.Option
 // Client API for AdminUserService service
 
 type AdminUserService interface {
-	AddUser(ctx context.Context, in *models_proto.AdminUser, opts ...client.CallOption) (*models_proto.AdminUser, error)
+	AddAdminUser(ctx context.Context, in *models_proto.AdminUser, opts ...client.CallOption) (*models_proto.AdminUser, error)
 }
 
 type adminUserService struct {
@@ -56,8 +56,8 @@ func NewAdminUserService(name string, c client.Client) AdminUserService {
 	}
 }
 
-func (c *adminUserService) AddUser(ctx context.Context, in *models_proto.AdminUser, opts ...client.CallOption) (*models_proto.AdminUser, error) {
-	req := c.c.NewRequest(c.name, "AdminUserService.AddUser", in)
+func (c *adminUserService) AddAdminUser(ctx context.Context, in *models_proto.AdminUser, opts ...client.CallOption) (*models_proto.AdminUser, error) {
+	req := c.c.NewRequest(c.name, "AdminUserService.AddAdminUser", in)
 	out := new(models_proto.AdminUser)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -69,12 +69,12 @@ func (c *adminUserService) AddUser(ctx context.Context, in *models_proto.AdminUs
 // Server API for AdminUserService service
 
 type AdminUserServiceHandler interface {
-	AddUser(context.Context, *models_proto.AdminUser, *models_proto.AdminUser) error
+	AddAdminUser(context.Context, *models_proto.AdminUser, *models_proto.AdminUser) error
 }
 
 func RegisterAdminUserServiceHandler(s server.Server, hdlr AdminUserServiceHandler, opts ...server.HandlerOption) error {
 	type adminUserService interface {
-		AddUser(ctx context.Context, in *models_proto.AdminUser, out *models_proto.AdminUser) error
+		AddAdminUser(ctx context.Context, in *models_proto.AdminUser, out *models_proto.AdminUser) error
 	}
 	type AdminUserService struct {
 		adminUserService
@@ -87,6 +87,6 @@ type adminUserServiceHandler struct {
 	AdminUserServiceHandler
 }
 
-func (h *adminUserServiceHandler) AddUser(ctx context.Context, in *models_proto.AdminUser, out *models_proto.AdminUser) error {
-	return h.AdminUserServiceHandler.AddUser(ctx, in, out)
+func (h *adminUserServiceHandler) AddAdminUser(ctx context.Context, in *models_proto.AdminUser, out *models_proto.AdminUser) error {
+	return h.AdminUserServiceHandler.AddAdminUser(ctx, in, out)
 }
